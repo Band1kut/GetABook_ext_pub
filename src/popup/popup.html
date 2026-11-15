@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <title>Поиск аудиокниги</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            width: 320px;
+            padding: 12px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-size: 13px;
+            color: #222;
+            background-color: #f9f9fb;
+        }
+
+        /* Общие контейнеры видов */
+        .view-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Баннер обновления */
+        .update-banner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #e6f4ea;
+            border: 1px solid #ceead6;
+            color: #137333;
+            padding: 6px 10px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            font-size: 12px;
+        }
+
+        .update-banner button {
+            background: #137333;
+            color: #fff;
+            border: none;
+            padding: 3px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 11px;
+        }
+
+        .update-banner button:hover {
+            background: #0f5223;
+        }
+
+        /* Выбор поисковика */
+        .engine-selector {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 10px;
+        }
+
+        .engine-selector label {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        /* Контейнер строки поиска */
+        .search-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 9px 36px 9px 12px;
+            border: 1px solid #d0d0d5;
+            border-radius: 8px;
+            outline: none;
+            font-size: 13px;
+            background-color: #fff;
+            transition: all 0.2s ease;
+        }
+
+        .search-input:focus {
+            border-color: #0077ff;
+            box-shadow: 0 0 0 3px rgba(0, 119, 255, 0.15);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 6px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            background: transparent;
+            border: none;
+            border-radius: 6px;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .search-btn:hover {
+            color: #0077ff;
+            background-color: #f0f4ff;
+        }
+
+        details {
+            background: #fff;
+            border: 1px solid #e1e1e8;
+            border-radius: 6px;
+            padding: 8px 10px;
+        }
+
+        summary {
+            font-weight: 600;
+            cursor: pointer;
+            color: #444;
+            user-select: none;
+        }
+
+        .sites-actions {
+            display: flex;
+            justify-content: space-between;
+            margin: 8px 0;
+            padding-bottom: 6px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .sites-actions button {
+            background: none;
+            border: none;
+            color: #0077ff;
+            font-size: 11px;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .sites-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px 10px;
+            max-height: 180px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+
+        .site-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            cursor: pointer;
+        }
+
+        .site-item input {
+            cursor: pointer;
+        }
+
+        /* Футер */
+        .popup-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 12px;
+            padding-top: 8px;
+            border-top: 1px solid #eee;
+            font-size: 12px;
+        }
+
+        .footer-link-btn {
+            background: none;
+            border: none;
+            color: #0077ff;
+            cursor: pointer;
+            padding: 0;
+            font-size: 12px;
+            text-decoration: underline;
+        }
+
+        .footer-link-btn:hover {
+            color: #0056b3;
+        }
+
+        .footer-link {
+            color: #0077ff;
+            text-decoration: underline;
+        }
+
+        .footer-link:hover {
+            color: #0056b3;
+        }
+
+        /* Шапка и контент суб-экрана */
+        .sub-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .sub-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .sub-body {
+            font-size: 12px;
+            line-height: 1.4;
+            color: #333;
+            word-break: break-word;
+            max-height: 320px;
+            overflow-y: auto;
+            padding-right: 2px;
+            margin-bottom: 12px;
+        }
+
+        .sub-action-footer {
+            padding-top: 8px;
+            border-top: 1px solid #eee;
+            text-align: right;
+        }
+
+        /* Единый стиль синих кнопок (для «Назад» и «Перейти к релизу») */
+        .primary-btn {
+            background: #0077ff;
+            color: #fff;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+        }
+
+        .primary-btn:hover {
+            background: #0056b3;
+        }
+
+        .primary-btn:active {
+            transform: scale(0.96);
+        }
+
+        /* Компактный модификатор для кнопки в шапке */
+        .btn-sm {
+            padding: 4px 10px;
+            font-size: 11px;
+        }
+    </style>
+  <script type="module" crossorigin src="/src/popup/popup.js"></script>
+</head>
+<body>
+
+<!-- ГЛАВНЫЙ ЭКРАН -->
+<div id="mainView" class="view-container">
+    <!-- Баннер обновления (скрыт по умолчанию) -->
+    <div id="updateBanner" class="update-banner" style="display: none;">
+        <span>Доступна версия <b id="newVersionText"></b></span>
+        <button id="showChangelogBtn">Что нового?</button>
+    </div>
+
+    <!-- Переключатель поисковика -->
+    <div class="engine-selector">
+        <label>
+            <input type="radio" name="engine" value="yandex" checked /> Yandex
+        </label>
+        <label>
+            <input type="radio" name="engine" value="google" /> Google
+        </label>
+    </div>
+
+    <!-- Строка поиска с встроенной кнопкой -->
+    <div class="search-wrapper">
+        <input id="bookInput" class="search-input" type="text" placeholder="Поиск книги..." autofocus />
+        <button id="searchBtn" class="search-btn" title="Найти">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+        </button>
+    </div>
+
+    <!-- Спойлер настроек сайтов -->
+    <details>
+        <summary id="sitesSummary">Настройка сайтов</summary>
+        <div class="sites-actions">
+            <button id="selectAllBtn">Выбрать все</button>
+            <button id="deselectAllBtn">Снять все</button>
+        </div>
+        <div id="sitesContainer" class="sites-grid"></div>
+    </details>
+
+    <!-- Футер -->
+    <div class="popup-footer">
+        <button id="donateBtn" class="footer-link-btn">Донат</button>
+        <a id="supportLink" href="#" target="_blank" class="footer-link" rel="noopener noreferrer">Поддержка</a>
+    </div>
+</div>
+
+<!-- СУБ-ЭКРАН (для ченжлога и донатов) -->
+<div id="subView" class="view-container" style="display: none;">
+    <div class="sub-header">
+        <span id="subTitle" class="sub-title">Заголовок</span>
+        <button id="backBtn" class="primary-btn btn-sm">Назад</button>
+    </div>
+    <div id="subContent" class="sub-body"></div>
+    <div id="subActionFooter" class="sub-action-footer" style="display: none;"></div>
+</div>
+
+</body>
+</html>
