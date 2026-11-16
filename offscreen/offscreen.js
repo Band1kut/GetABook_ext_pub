@@ -1,6 +1,6 @@
 /* offscreen.js
    Исполнитель задач скачивания HLS: качает сегменты, расшифровывает AES-128,
-   трансмуксит в fMP4 через mux-4.js на лету, патчит duration, отдаёт blob URL наверх
+   трансмуксит в fMP4 через mux.js на лету, патчит duration, отдаёт blob URL наверх
    и ждёт CLEAR.
 
    Входящие:  START_JOB, CANCEL_JOB, CLEAR, CLEAR_ALL
