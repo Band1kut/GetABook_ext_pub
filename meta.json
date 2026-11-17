@@ -1,7 +1,7 @@
 {
   "version": "1.4.1",
   "releaseUrl": "https://github.com/Band1kut/GetABook_ext_pub/releases/latest",
-  "changelog": "- Добавлена поддержка lis10book.com\n- Реализовано кеширование последнего поискового запроса (1 час)\n- Поддерживаются поддомены типа \"pda.site.com\", \"m.site.com\" и т.п.",
+  "changelog": "- Добавлена поддержка lis10book.com\n- Реализовано кеширование последнего поискового запроса (1 час)\n- Поддерживаются поддомены типа \"pda.site.com\", \"m.site.com\" и т.п.\n- Добавлено оповещение о выходе новай версии",
   "metaJsonUrl": "https://raw.githubusercontent.com/Band1kut/GetABook_ext_pub/refs/heads/master/meta.json",
   "supportUrl": "https://t.me/GetAudioBook_Support/18",
   "donate": "KirQn9GA0L7QtdC60YIg0L/QvtC70L3QvtGB0YLRjNGOINCx0LXRgdC/0LvQsNGC0L3Ri9C5INC4INGB0L7Qt9C00LDQtdGC0YHRjyDQvdCwINGN0L3RgtGD0LfQuNCw0LfQvNC1LiDQktGLINC80L7QttC10YLQtSDQv9C+0LzQvtGH0Ywg0YDQsNC30LLQuNGC0LjRjiDQuCDQv9C+0LTQtNC10YDQttC60LUg0LjQvdGB0YLRgNGD0LzQtdC90YLQsCDQu9GO0LHRi9C8INGD0LTQvtCx0L3Ri9C8INGB0L/QvtGB0L7QsdC+0Lw6KipcblxuKirQutCw0YDRgtCwINCh0JHQldCgOioqIDIyMDIgMjA5MiA3MjU5IDcyODZcblxuKipVU0RUIFRSQzIwOioqIFRNQnZSeXo4MlNIemhOUVI2aUI1am41d1M4VkVFZzJWODVcblxuW9C60L7RiNC10LvQtdC6INCuTW9uZXldKGh0dHBzOi8veW9vbW9uZXkucnUvdG8vNDEwMDE1OTYyMDgyODAxKVxuXG5b0JTQvtC90LDRgiDRgSDQu9GO0LHQvtC5INC60LDRgNGC0Ysg0LIgVGVsZWdyYW1dKGh0dHBzOi8vdC5tZS90cmlidXRlL2FwcD9zdGFydGFwcD1kdlBZKVxuXG4qKtCh0L/QsNGB0LjQsdC+IeKdpO+4jw=="
