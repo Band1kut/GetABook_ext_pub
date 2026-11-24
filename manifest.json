@@ -36,8 +36,10 @@
     "*://www.knigoblud.club/*",
     "*://knizhin.net/*",
     "*://lis10book.com/*",
+    "*://proknigi.com/*",
     "*://uknig.com/*",
-    "*://vseaudioknigi.com/*"
+    "*://vseaudioknigi.com/*",
+    "*://yakniga.org/*"
   ],
   "background": {
     "service_worker": "src/background/background.ts",
@@ -93,8 +95,10 @@
         "*://www.knigoblud.club/*",
         "*://knizhin.net/*",
         "*://lis10book.com/*",
+        "*://proknigi.com/*",
         "*://uknig.com/*",
-        "*://vseaudioknigi.com/*"
+        "*://vseaudioknigi.com/*",
+        "*://yakniga.org/*"
       ],
       "js": [
         "src/content/main.ts"
