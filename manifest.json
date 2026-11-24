@@ -42,7 +42,7 @@
     "*://yakniga.org/*"
   ],
   "background": {
-    "service_worker": "src/background/background.ts",
+    "service_worker": "src/background/background.js",
     "type": "module"
   },
   "web_accessible_resources": [
@@ -101,7 +101,7 @@
         "*://yakniga.org/*"
       ],
       "js": [
-        "src/content/main.ts"
+        "src/content/main.js"
       ],
       "run_at": "document_start"
     }
